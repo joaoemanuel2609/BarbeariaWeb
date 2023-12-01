@@ -15,13 +15,13 @@
 List<Barbeiro> listaBarbeiros = (List<Barbeiro>) request.getAttribute("listaBarbeiros");
 List<Agendamento> listaAgendamentos = (List<Agendamento>) request.getAttribute("listaAgendamentos"); %>
 <header>
-	<nav class="menu">
-		<ul class="lista-links">
-			<li class="link"><a href="/agendamentosPendentes">Consultar agendamento</a></li>
-			<li class="link"><a href="/agendarHorario">Agendar horario</a></li>
-		
-		</ul>
-	</nav>
+<%Barbeiro barbeiro = (Barbeiro)  session.getAttribute("barbeiro"); %>
+<nav class="menu">
+	<ul class="lista-links">
+		<li class="link"><a href="/listarAgendamentos" style="text-decoration:none; color: #fff;">Consultar agendamento</a></li>
+		<li class="link"><a href="/agendarHorario" style="text-decoration:none; color: #fff;">Agendar horario</a></li>
+	</ul>
+</nav>
 </header>
 <div class="conteudo-principal-agendamentos">
 	<div class="titulo">

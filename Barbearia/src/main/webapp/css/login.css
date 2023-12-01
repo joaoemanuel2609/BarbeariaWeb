@@ -1,6 +1,6 @@
-@charset "ISO-8859-1";
 body {
-    background-color: #f8f9fa;
+    background-color: #0d6493;
+    font-family: Karantina; 
 }
 
 h2 {
@@ -14,7 +14,7 @@ h2 {
 }
 
 .logoP {
-    width: 150px;
+    width: 150px; /* Ajuste o tamanho conforme necessário */
 }
 
 #section-logar {
@@ -38,8 +38,18 @@ input {
     box-sizing: border-box;
 }
 
+
 #botao-entrar {
-    width: 100%;
+    width: 50%;
+    background-color: #fff;
+    font-family: Karantina;
+    color:#0d6493;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 7px;
+    border: none;
+    height: 30px;
+    cursor: pointer;
 }
 
 .erro {
@@ -47,3 +57,17 @@ input {
     display: flex;
 	
 }
+
+.inputLogin{
+	border: none;
+	border-radius: 7px;
+	cursor: text;
+	transition: 0,5s ease-in-out;
+}
+
+.inputSenha{
+	border: none;
+	border-radius: 7px;
+}
+
+

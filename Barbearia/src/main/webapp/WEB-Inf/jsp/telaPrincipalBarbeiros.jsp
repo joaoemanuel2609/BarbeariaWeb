@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List, com.application.model.Agendamento, com.application.model.Barbeiro " %>    
+	pageEncoding="ISO-8859-1"%>
+<%@ page
+	import="java.util.List, com.application.model.Agendamento, com.application.model.Barbeiro "%> 
 
 
 <!DOCTYPE html>
@@ -9,18 +10,19 @@
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 <meta charset="ISO-8859-1">
 <title>Tela Principal</title>
+
 </head>
 <header>
+<%Barbeiro barbeiro = (Barbeiro)  session.getAttribute("barbeiro"); %>
 	<nav class="menu">
 		<ul class="lista-links">
-			<li class="link"><a href="/agendamentosPendentes">Consultar agendamento</a></li>
+			<li class="link"><a href="/agendamentosPendentesPorBarbeiro?id=<%=barbeiro.getId()%>">Consultar agendamento</a></li>
 			<li class="link"><a href="/agendarHorario">Agendar horario</a></li>
-			<li class="link"><a href="/listarBarbeiros">Barbeiros</a></li>
-			<li class="link"><a href="/historicoCaixa">Historico de caixa</a></li>
+			
 		</ul>
 	</nav>
 </header>
-<%Barbeiro barbeiro = (Barbeiro)  session.getAttribute("barbeiro"); %>
+
 <body>
 <div class="titulo">
 	<h2 class="sub-tit">Bem vindo <%=barbeiro.getNome() %> </h2>

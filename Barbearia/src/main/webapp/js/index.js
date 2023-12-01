@@ -1,6 +1,6 @@
 
 function redirecionarParaAgendamentos() {
-	console.log("cu");
+	
 	var select = document.getElementById("barber-name");
 	var selectedOption = select.options[select.selectedIndex];
 	var barbeiroId = selectedOption.getAttribute("data-barbeiro-id");

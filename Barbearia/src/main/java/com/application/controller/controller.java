@@ -61,7 +61,7 @@ public class controller {
 					return "telaPrincipalAnder";
 				}else {
 					session.setAttribute("barbeiro", barbeiro);
-					return "telaPrincipalBarbeiro";
+					return "telaPrincipalBarbeiros";
 				}
 				
 			}else {
@@ -88,7 +88,7 @@ public class controller {
 	@GetMapping("/agendamentosBarbeiro")
 	public String Agentamentos() {
 		
-		return "redirect:/agendamentosPendentes";
+		return "redirect:/agendamentosPendentesPorBarbeiro";
 	}
 
 
@@ -107,7 +107,7 @@ public class controller {
 		if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
 			return "telaPrincipalAnder";
 		}else {
-			return "telaPrincipalBarbeiro";
+			return "telaPrincipalBarbeiros";
 		}
 		
 	}
@@ -122,12 +122,12 @@ public class controller {
 		model.addAttribute("listaAgendamentos" , listaAgendados);		
 		model.addAttribute("listaBarbeiros", listaBarbeiros);
 		
-		
-		if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
-			return "telaAgendamentosAnder";
-		}else {
-			return "telaAgendamentosBarbeiro";
-		}
+		return "telaAgendamentosAnder";
+//		if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
+//			return "telaAgendamentosAnder";
+//		}else {
+//			return "telaAgendamentosBarbeiro";
+//		}
 
 
 
@@ -159,11 +159,10 @@ public class controller {
 		agendamento.setStatus("Concluido");
 		agendamentoRepository.save(agendamento);
 		
-		 // Verifique as credenciais do barbeiro para determinar a página a ser exibida
 		if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
-			return "redirect:/listarAgendamentos";
+			return "telaPrincipalAnder";
 		}else {
-			return "redirect:/agendamentosPendentesPorBarbeiro";	
+			return "telaPrincipalBarbeiros";
 		}
 
 	}
@@ -178,29 +177,17 @@ public class controller {
 		agendamento.setStatus("Excluido");
 		agendamentoRepository.save(agendamento);
 		
-		 // Verifique as credenciais do barbeiro para determinar a página a ser exibida
 		if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
-			return "redirect:/agendamentosPendentes";
+			return "telaPrincipalAnder";
 		}else {
-			return "telaAgendamentosBarbeiro";
+			return "telaPrincipalBarbeiros";
 		}
-	}
+		}
+///////////
 	
 	
-//	@GetMapping("/listarAgendamentosNomeBarbeiro")
-//	public String listarAgendamentosBarbeiro(Model model, HttpSession session, @RequestParam("id") String id) {
-//		
-//		Barbeiro barbeiro = (Barbeiro) session.getAttribute("barbeiro");
-//		List<Barbeiro> listaBarbeiros = barbeiroRepository.findAll();
-////		List<Agendamento> listaAgendamentosBarbeiro = agendamentoRepository.findByBarbeiro(Integer.parseInt(id));			
-//		model.addAttribute("listaAgendamentos" , listaAgendamentosBarbeiro);
-//		model.addAttribute("listaBarbeiros", listaBarbeiros);
-//		if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
-//			return "telaAgendamentosAnder";
-//		}else {
-//			return "telaAgendamentosBarbeiro";
-//		}
-//	}
+	
+
 
 	@GetMapping("/listarBarbeiros")
 	public String listarBarbeiros(Model model) {
@@ -210,20 +197,21 @@ public class controller {
 		for (Barbeiro barbeiro : listaBarbeiros) {
 			System.out.println(barbeiro);
 		}
-		model.addAttribute("listaBarbeiros" , listaBarbeiros);
+		model.addAttribute("listaBarbeiros", listaBarbeiros);
 
-		return "listarBarbeiros";
+		return "telaBarbeiros";
 
 	}
+	
 
 	@GetMapping("/listarAgendamentos")
 	public String listarAgendamentos(Model model, HttpSession session) {
 		
 		
 		Barbeiro barbeiro = (Barbeiro) session.getAttribute("barbeiro");
+		List<Agendamento> listaAgendados = agendamentoRepository.findByStatus("Agendado");			
 		List<Barbeiro> listaBarbeiros = barbeiroRepository.findAll();
-		List<Agendamento> listaAgendamentos = agendamentoRepository.findAll();			
-		model.addAttribute("listaAgendamentos" , listaAgendamentos);
+		model.addAttribute("listaAgendamentos" , listaAgendados);		
 		model.addAttribute("listaBarbeiros", listaBarbeiros);
 		if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
 			return "telaAgendamentosAnder";
@@ -242,13 +230,18 @@ public class controller {
 
 	}
 	@GetMapping("/atualizarAgendamento")
-	public String atualizar(@RequestParam("id") String id, Model model) {
+	public String atualizar(@RequestParam("id") String id, Model model, HttpSession session) {
+		Barbeiro barbeiro = (Barbeiro) session.getAttribute("barbeiro");
 
+		System.out.println(barbeiro);
+		
 		Optional<Agendamento> agendamento = agendamentoRepository.findById(Integer.parseInt(id));
 
 		model.addAttribute("agendamento", agendamento.get());
-
+		
+	
 		return "telaAtualizarAgendamento";
+	
 
 	}
 	
@@ -260,14 +253,23 @@ public class controller {
 
 		agendamento.setBarbeiro(barbeiro);
 		agendamento.setStatus("Agendado");
-
-		agendamentoRepository.save(agendamento);
 		
-		if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
-			return "redirect:/listarAgendamentos";
+		agendamentoRepository.save(agendamento);
+		List<Agendamento> listaAgendados = agendamentoRepository.findByStatus("Agendado");			
+		List<Barbeiro> listaBarbeiros = barbeiroRepository.findAll();
+		model.addAttribute("listaAgendamentos" , listaAgendados);		
+		model.addAttribute("listaBarbeiros", listaBarbeiros);
+		
+			
+		if(barbeiro.getNome().equals("Ander") && barbeiro.getSenha().equals("123")) {
+			session.setAttribute("barbeiro", barbeiro);
+			return "telaAgendamentosAnder";
 		}else {
-			return "redirect:/agendamentosPendentesPorBarbeiro";	
+			session.setAttribute("barbeiro", barbeiro);
+			return "telaPrincipalBarbeiros";
 		}
+		
+		
 		
 
 		
@@ -286,16 +288,8 @@ public class controller {
 	@GetMapping("/agendamentosPendentesPorBarbeiro")
 	public String listarPendentesPorBarbeiro(@RequestParam("id") String barbeiroId, Model model, HttpSession session) {
 	    Integer barbeiroIdI = Integer.parseInt(barbeiroId);
-	    
-//	    Barbeiro barbeiro = (Barbeiro) session.getAttribute("nomeBarbeiro");
-//
-//	    if (barbeiro == null) {
-//	   
-//	        return "redirect:/telaLogin"; 
-//	    }
-
 	    List<Agendamento> listaAgendados = agendamentoRepository.findByStatusAndBarbeiroId("Agendado", barbeiroIdI);
-	    
+	    Barbeiro barbeiro = (Barbeiro) session.getAttribute("barbeiro");
 	    Barbeiro barbeiroNome = barbeiroRepository.findById(barbeiroIdI).orElse(null); 
 	    
 	    if(barbeiroNome != null) {
@@ -305,19 +299,19 @@ public class controller {
 	    }
 	    
 
-	    // Outras informações que podem ser úteis, como a lista de todos os barbeiros
+	    
 	    List<Barbeiro> listaBarbeiros = barbeiroRepository.findAll();
 
-	    // Adicione os dados ao modelo
+	  
 	    model.addAttribute("listaAgendamentos", listaAgendados);
 	    model.addAttribute("listaBarbeiros", listaBarbeiros);
 
-//	    // Verifique as credenciais do barbeiro para determinar a página a ser exibida
-//	    if (barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
-//	    } else {
-//	        return "telaAgendamentosBarbeiro";
-//	    }
-        return "telaAgendamentosAnder";
+	    if(barbeiro.getLogin().equals("ander") && barbeiro.getSenha().equals("123")) {
+			return "telaAgendamentosAnder";
+		}else {
+			return "telaAgendamentosBarbeiro";
+		}
+        //return "telaAgendamentosBarbeiro";
 
 	}
 	@GetMapping("/historicoCaixa")

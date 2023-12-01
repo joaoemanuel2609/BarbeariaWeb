@@ -1,41 +1,32 @@
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<!-- Arquivo JavaScript do Bootstrap (necessário para recursos interativos) -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<link rel="stylesheet" type="text/css" href="/css/login.css">
-<title>Login</title>
+<link rel="stylesheet" type="text/css" href="css/agendarHorario.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" >
+<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-	<h2>Informe seu usuário e senha:</h2>
+    <img src="imagens/logoAnder.png" alt="logoAnder" class="logoP">
+	<h2 style="color: #fff; font-size: 40px; font-weight: normal;">Informe seu usuario e senha:</h2>
 	<div id="section-principal">
-		<img src="logoAnder.png" alt="logoAnder" class="logoP">
 		<div id="section-logar">
 			<form action="/autenticar" method="post">
-				<p>Login:</p>
-				<input type="text" name="login" required> <br>
+				<p  style="color: #fff; font-size: 25px; font-weight: normal;">Login:</p>
+				<input type="text" name="login" class="inputLogin" required> <br>
 				<br>
-				<p>Senha:</p>
-				<input type="text" name="senha" required> <br>
+				<p  style="color: #fff; font-size: 25px; font-weight: normal;">Senha:</p>
+				<input type="password" name="senha" class="inputSenha" required> <br>
 				<br>
 				<button type="submit" class="btn btn-outline-secondary"
 					id="botao-entrar">Entrar</button>
 			</form>
 		</div>
 	</div>
-
-
-
 	<%
 	String erro = (String) request.getAttribute("error");
 	if (erro != null) {
@@ -47,7 +38,5 @@
 		}
 	}
 	%>
-
-
 </body>
 </html>

@@ -5,28 +5,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/css/index.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+
+<link rel="stylesheet" type="text/css" href="css/agendarHorario.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" >
+<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300&display=swap" rel="stylesheet">
 <script type="text/javascript" src="js/index.js"></script><meta charset="ISO-8859-1">
 <title>Agendamentos</title>
 </head>
+<header>
+<nav class="menu">
+	<ul class="lista-links">
+		<li class="link"><a href="/listarAgendamentos" style="text-decoration:none; color: #fff;">Consultar agendamento</a></li>
+		<li class="link"><a href="/agendarHorario" style="text-decoration:none; color: #fff;">Agendar horario</a></li>
+		<li class="link"><a href="/listarBarbeiros" style="text-decoration:none; color: #fff;">Barbeiros</a></li>
+		<li class="link"><a href="/historicoCaixa" style="text-decoration:none; color: #fff;">Historico de caixa</a></li>
+	</ul>
+</nav>
+</header>
 <body>
 <% 
 List<Barbeiro> listaBarbeiros = (List<Barbeiro>) request.getAttribute("listaBarbeiros");
 List<Agendamento> listaAgendamentos = (List<Agendamento>) request.getAttribute("listaAgendamentos"); 
-String nomeBarbeiro = (String) request.getAttribute("nomeBarbeiro");%>
-<header>
-	<nav class="menu">
-		<ul class="lista-links">
-			<li class="link"><a href="/agendamentosPendentes">Consultar agendamento</a></li>
-			<li class="link"><a href="/agendarHorario">Agendar horario</a></li>
-			<li class="link"><a href="/listarBarbeiros">Barbeiros</a></li>
-			<li class="link"><a href="/historicoCaixa">Historico de caixa</a></li>
-		</ul>
-	</nav>
-</header>
+String nomeBarbeiro = (String) request.getAttribute("nomeBarbeiro");
+%>
+
 <div class="conteudo-principal-agendamentos">
 	<div class="titulo">
-		<h2 id="sub-tit">CONSULTAR AGENDAMENTOS</h2>
+		<h2 class="sub-tit">CONSULTAR AGENDAMENTOS</h2>
 	</div>
 	
 	<div class="menu-filtros">

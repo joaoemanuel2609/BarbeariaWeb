@@ -7,13 +7,26 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Historico de caixa</title>
-<link rel="stylesheet" type="text/css" href="/css/telaHistoricoCaixa.css">
+<link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
+<header>
+	<nav class="menu">
+		<ul class="lista-links">
+			<li class="link"><a href="/agendamentosPendentes">Consultar agendamento</a></li>
+			<li class="link"><a href="/agendarHorario">Agendar horario</a></li>
+			<li class="link"><a href="/listarBarbeiros">Barbeiros</a></li>
+			<li class="link"><a href="/historicoCaixa">Historico de caixa</a></li>
+		</ul>
+	</nav>
+</header>
 <body>
 <%List<Agendamento> listaAgendamentos = (List<Agendamento>) request.getAttribute("listaAgendamentos"); 
  %>
     <br>
-    <h2> Histórico de Caixa</h2>
+    <div class="titulo">
+        <h2 id="sub-tit"> Histórico de Caixa</h2>
+    
+    </div>
     <br>
     <br>
      <form:form method="post" action="/filtrarHistoricoCaixa">
